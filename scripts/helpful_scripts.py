@@ -8,6 +8,8 @@ LOCAL_BLOCKCHAIN_ENVIRONMENTS = [
     "mainnet-fork",
 ]
 
+OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
+
 
 def get_account(index=None, id=None):
     if index:
