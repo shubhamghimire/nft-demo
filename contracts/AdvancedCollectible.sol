@@ -35,7 +35,7 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
         fee = _fee;
     }
 
-    function createCollectible(string memory tokenURI)
+    function createCollectible()
         public
         returns (bytes32)
     {
@@ -54,5 +54,10 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
         _safeMint(owner, newTokenId);
 
         tokenCounter = tokenCounter + 1;
+    }
+
+    function setTokenURI(uint256 tokenId, string memory _tokenURI) public {
+        // ganesh, shiva, hanuman
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not owner no approved");
     }
 }
