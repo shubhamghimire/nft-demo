@@ -21,6 +21,7 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
     mapping(uint256 => GodType) public tokenIdToGodType;
     mapping(bytes32 => address) public requestIdToSender;
     event requestCollectible(bytes32 indexed requestId, address requester);
+    event godAssigned(uint256 indexes tokenId, GodType gtype);
 
     constructor(
         address _vrfCoordinator,
@@ -52,6 +53,7 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
         GodType gtype = GodType(randomNumber % 3);
         uint256 newTokenId = tokenCounter;
         tonekIdToGodType[??] = gtype;
+        emit godAssigned(newTokenId, gtype);
         address owner = requestIdToSender[requestId];
         _safeMint(owner, newTokenId);
 
