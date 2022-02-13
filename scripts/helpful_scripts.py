@@ -51,3 +51,19 @@ def get_contract(contract_name):
             contract_type._name, contract_address, contract_type.abi
         )
     return contract
+
+
+def deploy_mocks():
+    """
+    Use this script if you want to deploy mocks to a testnet
+    """
+    print(f"The active network is {network.show_active()}")
+    print("Deploying mocks...")
+    account = get_account()
+    print("Deploying Mock LinkToken...")
+    link_token = LinkToken.deploy({"from": account})
+    print(f"Link Token deployed to {link_token.address}")
+    print("Deploying Mock VRF Coordinator...")
+    vrf_coordinator = VRFCoordinatorMock.deploy(link_token.address, {"from": account})
+    print(f"VRFCoordinator deployed to {vrf_coordinator.address}")
+    print("All done!")
