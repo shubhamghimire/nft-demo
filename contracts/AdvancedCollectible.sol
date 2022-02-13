@@ -20,14 +20,14 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
     }
     mapping(uint256 => GodType) public tokenIdToGodType;
     mapping(bytes32 => address) public requestIdToSender;
-    event requestCollectible(bytes32 indexed requestId, address requester);
-    event godAssigned(uint256 indexes tokenId, GodType gtype);
+    event requestedCollectible(bytes32 indexed requestId, address requester);
+    event godAssigned(uint256 indexed tokenId, GodType gtype);
 
     constructor(
         address _vrfCoordinator,
         address _linkToken,
         bytes32 _keyhash,
-        uint256 fee
+        uint256 _fee
     )
         public
         VRFConsumerBase(_vrfCoordinator, _linkToken)
@@ -37,22 +37,19 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
         fee = _fee;
     }
 
-    function createCollectible()
-        public
-        returns (bytes32)
-    {
+    function createCollectible() public returns (bytes32) {
         bytes32 requestId = requestRandomness(keyhash, fee);
         requestIdToSender[requestId] = msg.sender;
         emit requestedCollectible(requestId, msg.sender);
     }
 
-    function fulfillRandomness(bytes32 requestId, unit256 randomNumber)
+    function fulfillRandomness(bytes32 requestId, uint256 randomNumber)
         internal
         override
     {
         GodType gtype = GodType(randomNumber % 3);
         uint256 newTokenId = tokenCounter;
-        tonekIdToGodType[??] = gtype;
+        tokenIdToGodType[newTokenId] = gtype;
         emit godAssigned(newTokenId, gtype);
         address owner = requestIdToSender[requestId];
         _safeMint(owner, newTokenId);
@@ -62,7 +59,10 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
 
     function setTokenURI(uint256 tokenId, string memory _tokenURI) public {
         // ganesh, shiva, hanuman
-        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not owner no approved");
+        require(
+            _isApprovedOrOwner(_msgSender(), tokenId),
+            "ERC721: caller is not owner no approved"
+        );
         _setTokenURI(tokenId, _tokenURI);
     }
 }
