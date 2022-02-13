@@ -1,5 +1,5 @@
 from scripts.helpful_scripts import get_account, OPENSEA_URL, get_contract
-from brownie import AdvancedCollectible
+from brownie import AdvancedCollectible, network, config
 
 
 def deploy_and_create():
