@@ -20,6 +20,7 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
     }
     mapping(uint256 => GodType) public tokenIdToGodType;
     mapping(bytes32 => address) public requestIdToSender;
+    event requestCollectible(bytes32 indexed requestId, address requester);
 
     constructor(
         address _vrfCoordinator,
@@ -41,6 +42,7 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
     {
         bytes32 requestId = requestRandomness(keyhash, fee);
         requestIdToSender[requestId] = msg.sender;
+        emit requestedCollectible(requestId, msg.sender);
     }
 
     function fulfillRandomness(bytes32 requestId, unit256 randomNumber)
@@ -48,7 +50,7 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
         override
     {
         GodType gtype = GodType(randomNumber % 3);
-        unit256 newTokenId = tokenCounter;
+        uint256 newTokenId = tokenCounter;
         tonekIdToGodType[??] = gtype;
         address owner = requestIdToSender[requestId];
         _safeMint(owner, newTokenId);
@@ -59,5 +61,6 @@ contract AdvancedCollectibel is ERC721, VRFConsumerBase {
     function setTokenURI(uint256 tokenId, string memory _tokenURI) public {
         // ganesh, shiva, hanuman
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not owner no approved");
+        _setTokenURI(tokenId, _tokenURI);
     }
 }
