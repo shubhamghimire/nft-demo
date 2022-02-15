@@ -1,4 +1,4 @@
-from brownie import AdvancedCollectible, account
+from brownie import AdvancedCollectible
 from scripts.helpful_scripts import fund_with_link, get_account
 from web3 import Web3
 
