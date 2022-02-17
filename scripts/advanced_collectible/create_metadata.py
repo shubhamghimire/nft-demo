@@ -1,5 +1,7 @@
-from brownie import AdvancedCollectible
+from brownie import AdvancedCollectible, network
 from scripts.helpful_scripts import get_gtype
+from metadata.sample_metadata import metadata_template
+from pathlib import Path
 
 
 def main():
@@ -8,3 +10,11 @@ def main():
     print(f"You have created {number_of_advanced_collectibles} collectibles! ")
     for token_id in range(number_of_advanced_collectibles):
         gtype = get_gtype(advanced_collectible.tokenIdToGodType(token_id))
+        print("Hello")
+        metadata_file_name = (
+            f"./metadata/{network.show_active()}/{token_id}-{gtype}.json"
+        )
+        if Path(metadata_file_name).exists():
+            print(f"{metadata_file_name} already exists! Delete it to overwrite")
+        else:
+            print(f"Creating metadata file: {metadata_file_name} ")
