@@ -11,6 +11,12 @@ LOCAL_BLOCKCHAIN_ENVIRONMENTS = [
 
 OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
 
+GTYPE_MAPPING = {0: "SHIVA", 1: "GANESH", 2: "HANUMAN"}
+
+
+def get_gtype(gtype_number):
+    return GTYPE_MAPPING[gtype_number]
+
 
 def get_account(index=None, id=None):
     if index:
