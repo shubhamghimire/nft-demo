@@ -2,5 +2,5 @@ metadata_template = {
     "name": "",
     "description": "",
     "image": "",
-    "attributes": [{"strength": "power", "value": 100}],
+    "attributes": [{"strength": "Godliness", "value": 100}],
 }

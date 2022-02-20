@@ -18,3 +18,11 @@ def main():
             print(f"{metadata_file_name} already exists! Delete it to overwrite")
         else:
             print(f"Creating Metadata file: {metadata_file_name}")
+            collectible_metadata["name"] = gtype
+            collectible_metadata["description"] = f"A mighty {gtype} god!"
+            # image_uri = upload_to_ipfs()
+            # collectible_metadata["image"] = image_uri
+
+
+def upload_to_ipfs():
+    pass
