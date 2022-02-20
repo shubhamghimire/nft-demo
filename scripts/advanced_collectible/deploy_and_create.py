@@ -19,7 +19,6 @@ def deploy_and_create():
         config["networks"][network.show_active()]["fee"],
         {"from": account},
     )
-
     fund_with_link(advanced_collectible.address)
     creating_tx = advanced_collectible.createCollectible({"from": account})
     creating_tx.wait(1)

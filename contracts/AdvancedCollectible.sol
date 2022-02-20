@@ -1,9 +1,8 @@
-// An NFT contract
-// Where the tokenURI is one of different gods
-// Randomly Selected
+// An NFT Contract
+// Where the tokenURI can be one of 3 different dogs
+// Randomly selected
 
 // SPDX-License-Identifier: MIT
-
 pragma solidity 0.6.6;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -31,9 +30,10 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
     )
         public
         VRFConsumerBase(_vrfCoordinator, _linkToken)
-        ERC721("Power", "GOD")
+        ERC721("Almighty", "God")
     {
         tokenCounter = 0;
+        keyhash = _keyhash;
         fee = _fee;
     }
 
@@ -53,12 +53,11 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         emit godAssigned(newTokenId, gtype);
         address owner = requestIdToSender[requestId];
         _safeMint(owner, newTokenId);
-
         tokenCounter = tokenCounter + 1;
     }
 
     function setTokenURI(uint256 tokenId, string memory _tokenURI) public {
-        // ganesh, shiva, hanuman
+        // ganesh, shiva hanuman
         require(
             _isApprovedOrOwner(_msgSender(), tokenId),
             "ERC721: caller is not owner no approved"

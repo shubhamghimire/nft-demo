@@ -1,16 +1,8 @@
 from brownie import accounts, network, config, LinkToken, VRFCoordinatorMock, Contract
 from web3 import Web3
 
-LOCAL_BLOCKCHAIN_ENVIRONMENTS = [
-    "development",
-    "ganache",
-    "hardhat",
-    "local-ganache",
-    "mainnet-fork",
-]
-
+LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["hardhat", "development", "ganache", "mainnet-fork"]
 OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
-
 GTYPE_MAPPING = {0: "SHIVA", 1: "GANESH", 2: "HANUMAN"}
 
 
@@ -36,9 +28,11 @@ def get_contract(contract_name):
     This function will either:
         - Get an address from the config
         - Or deploy a Mock to use for a network that doesn't have the contract
+
     Args:
         contract_name (string): This is the name of the contract that we will get
         from the config or deploy
+
     Returns:
         brownie.network.contract.ProjectContract: This is the most recently deployed
         Contract of the type specified by a dictionary. This could either be a mock
