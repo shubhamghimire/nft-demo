@@ -1,0 +1,11 @@
+{
+    "name": "GANESH",
+    "description": "A mighty GANESH god!",
+    "image": "https://ipfs.io/ipfs/QmYSgvBUJQg9AyMzqDvFfC6fJ391aiByCDqPF9amt69A7G?filename=ganesh.png",
+    "attributes": [
+        {
+            "strength": "Godliness",
+            "value": 100
+        }
+    ]
+}

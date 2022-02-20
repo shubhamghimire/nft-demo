@@ -3,6 +3,7 @@ from scripts.helpful_scripts import get_gtype
 from metadata.sample_metadata import metadata_template
 from pathlib import Path
 import requests
+import json
 
 
 def main():
@@ -24,7 +25,10 @@ def main():
             image_path = "./img/" + gtype.lower().replace("_", "-") + ".png"
             print(image_path)
             image_uri = upload_to_ipfs(image_path)
-            # collectible_metadata["image"] = image_uri
+            collectible_metadata["image"] = image_uri
+            with open(metadata_file_name, "w") as file:
+                json.dump(collectible_metadata, file)
+            upload_to_ipfs(metadata_file_name)
 
 
 def upload_to_ipfs(filepath):
@@ -33,12 +37,9 @@ def upload_to_ipfs(filepath):
         ipfs_url = "http://127.0.0.1:5001"
         endpoint = "/api/v0/add"
         response = requests.post(ipfs_url + endpoint, files={"file": image_binary})
-        print(response.json())
         ipfs_hash = response.json()["Hash"]
         # "./img/0-SHIVA.png" -> "0-SHIVA.png"
         filename = filepath.split("/")[-1:][0]
-        print(filename)
-        print("filename printed")
         image_uri = f"https://ipfs.io/ipfs/{ipfs_hash}?filename={filename}"
         print(image_uri)
         return image_uri
