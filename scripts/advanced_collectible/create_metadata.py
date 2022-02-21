@@ -4,6 +4,13 @@ from metadata.sample_metadata import metadata_template
 from pathlib import Path
 import requests
 import json
+import os
+
+gtype_to_image_uri = {
+    "SHIVA": "https://ipfs.io/ipfs/QmRwBXmXSyP1j7TP2t6LFn5511wxH7Qn5oGFFw4QrqXepk?filename=shiva.png",
+    "GANESH": "https://ipfs.io/ipfs/QmYSgvBUJQg9AyMzqDvFfC6fJ391aiByCDqPF9amt69A7G?filename=ganesh.png",
+    "HANUMAN": "https://ipfs.io/ipfs/Qmcwqf5pDoYcpN7CNUbyCbKXVTW9wQopP8wirfn5SD2FGK?filename=hanuman.png",
+}
 
 
 def main():
@@ -23,12 +30,17 @@ def main():
             collectible_metadata["name"] = gtype
             collectible_metadata["description"] = f"A mighty {gtype} god!"
             image_path = "./img/" + gtype.lower().replace("_", "-") + ".png"
-            print(image_path)
-            image_uri = upload_to_ipfs(image_path)
+
+            image_uri = None
+            if os.getenv("UPLOAD_IPFS") == "true":
+                image_uri = upload_to_ipfs(image_path)
+            image_uri = image_uri if image_uri else gtype_to_image_uri[gtype]
+
             collectible_metadata["image"] = image_uri
             with open(metadata_file_name, "w") as file:
                 json.dump(collectible_metadata, file)
-            upload_to_ipfs(metadata_file_name)
+            if os.getenv("UPLOAD_IPFS") == "true":
+                upload_to_ipfs(metadata_file_name)
 
 
 def upload_to_ipfs(filepath):
