@@ -1,1 +1,11 @@
-{"name": "SHIVA", "description": "A mighty SHIVA god!", "image": "https://ipfs.io/ipfs/QmRwBXmXSyP1j7TP2t6LFn5511wxH7Qn5oGFFw4QrqXepk?filename=shiva.png", "attributes": [{"strength": "Godliness", "value": 100}]}
+{
+    "name": "SHIVA",
+    "description": "A mighty SHIVA god!",
+    "image": "https://ipfs.io/ipfs/QmRwBXmXSyP1j7TP2t6LFn5511wxH7Qn5oGFFw4QrqXepk?filename=shiva.png",
+    "attributes": [
+        {
+            "strength": "Godliness",
+            "value": 100
+        }
+    ]
+}
