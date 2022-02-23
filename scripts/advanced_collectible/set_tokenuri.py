@@ -4,8 +4,8 @@ from scripts.helpful_scripts import get_account, get_gtype, OPENSEA_URL
 # File uploaded to IPFS and took the
 god_metadata_dic = {
     "SHIVA": "https://ipfs.io/ipfs/QmULNZ8umdtXYAUB5y9UpaLXBNmN7SCgcpnMbEdx5eSEyi?filename=0-SHIVA.json",
-    "GANESH": "https://ipfs.io/ipfs/QmXx7UhfFnSrFmGhDsPurdLQEC1Dv4yZPkYfx4E5aAmh68?filename=1-GANESH.json",
-    "HANUMAN": "https://ipfs.io/ipfs/Qmf4TKekSuWnJ1reqWqju5KakLa4QA546VzP5cWdSXFVNp?filename=2-HANUMAN.json",
+    # "GANESH": "https://ipfs.io/ipfs/QmXx7UhfFnSrFmGhDsPurdLQEC1Dv4yZPkYfx4E5aAmh68?filename=1-GANESH.json",
+    "HANUMAN": "https://ipfs.io/ipfs/Qmf4TKekSuWnJ1reqWqju5KakLa4QA546VzP5cWdSXFVNp?filename=1-HANUMAN.json",
 }
 
 
@@ -24,6 +24,7 @@ def main():
 def set_tokenURI(token_id, nft_contract, tokenURI):
     account = get_account()
     tx = nft_contract.setTokenURI(token_id, tokenURI, {"from": account})
+    tx.wait(1)
     print(
         f"You can view your NFT at {OPENSEA_URL.format(nft_contract.address, token_id)}"
     )
